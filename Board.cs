@@ -8,9 +8,9 @@ namespace ConwayGameOfLife
 {
     public class Board
     {
-        public bool[,] grid;
-        public int rows = 100;
-        public int cols = 100;
+        private bool[,] grid;
+        private int rows = 100;
+        private int cols = 100;
 
         public Board()
         {
