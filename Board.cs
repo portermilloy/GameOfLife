@@ -15,6 +15,8 @@ namespace ConwayGameOfLife
         public Board()
         {
             grid = new bool[rows, cols];
+            grid[6, 5] = true;
+            grid[5, 6] = true;
         }
 
         public void PrintBoard()
@@ -38,6 +40,38 @@ namespace ConwayGameOfLife
                     grid[r, c] = false;
                 }
             }
+        }
+
+        public bool IsAlive(int row, int col)
+        {
+            if (row < 0 || row >= rows || col < 0 || col >= cols)
+            {
+                return false;
+            }
+
+            return grid[row, col];
+        }
+
+        public int CountNeighbors(int row, int col)
+        {
+            int count = 0;
+
+            for (int r = row - 1; r <= row + 1; r++)
+            {
+                for (int c = col - 1; c <= col + 1; c++)
+                {
+                    if (r == row && c == col)
+                    {
+
+                    }
+                    else if (IsAlive(r, c))
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
         }
 
     }
