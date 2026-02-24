@@ -9,8 +9,8 @@ namespace ConwayGameOfLife
     public class Board
     {
         private bool[,] grid;
-        private int rows = 100;
-        private int cols = 100;
+        private int rows = 10;
+        private int cols = 10;
 
         public Board()
         {
@@ -62,9 +62,10 @@ namespace ConwayGameOfLife
                 {
                     if (r == row && c == col)
                     {
-
+                        continue;
                     }
-                    else if (IsAlive(r, c))
+                    
+                    if (IsAlive(r, c))
                     {
                         count++;
                     }
