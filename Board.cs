@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,14 +10,22 @@ namespace ConwayGameOfLife
     public class Board
     {
         private bool[,] grid;
-        private int rows = 10;
-        private int cols = 10;
+        private int rows = 25;
+        private int cols = 25;
 
         public Board()
         {
             grid = new bool[rows, cols];
-            grid[6, 5] = true;
-            grid[5, 6] = true;
+
+            grid[12, 13] = true;
+            grid[12, 14] = true;
+
+            grid[13, 12] = true;
+            grid[13, 15] = true;
+
+            grid[14, 13] = true;
+            grid[14, 14] = true;
+            grid[14, 15] = true;
         }
 
         public void PrintBoard()
@@ -25,7 +34,17 @@ namespace ConwayGameOfLife
             {
                 for (int c = 0; c < cols; c++)
                 {
-                    Console.Write(grid[r, c]);
+                    
+                    if (grid[r, c])
+                    {
+                        Console.Write("O  ");
+
+                    }
+                    else
+                    {
+                        Console.Write(".  ");
+                    }
+                    
                 }
                 Console.WriteLine();
             }
@@ -75,5 +94,45 @@ namespace ConwayGameOfLife
             return count;
         }
 
+        public void NextGeneration()
+        {
+            bool[,] nextGeneration = new bool[rows, cols];
+
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < cols; c++)
+                {
+                    int neighbors = CountNeighbors(r, c);
+
+                    if (grid[r, c])
+                    {
+                        if (neighbors < 2)
+                        {
+                            nextGeneration[r, c] = false;
+                        }
+                        else if (neighbors == 2 || neighbors == 3)
+                        {
+                            nextGeneration[r, c] = true;
+                        }
+                        else
+                        {
+                            nextGeneration[r, c] = false;
+                        }
+                    }
+                    else
+                    {
+                        if (neighbors == 3)
+                        {
+                            nextGeneration[r, c] = true;
+                        }
+                        else
+                        {
+                            nextGeneration[r, c] = false;
+                        }
+                    }
+                }
+            }
+            grid = nextGeneration;
+        }
     }
 }

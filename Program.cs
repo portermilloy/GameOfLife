@@ -6,10 +6,20 @@ internal class Program
     {
         Board board = new Board();
 
-        board.PrintBoard();
+        int generations = 20;
 
-        int neighbor = board.CountNeighbors(5, 5);
+        for (int i = 0; i <= generations; i++)
+        {
+            Console.WriteLine($"\nGeneration {i}");
+            board.PrintBoard();
+            board.NextGeneration();
+            Thread.Sleep(200);
+        }
 
-        Console.WriteLine($"The spot (5, 5) has {neighbor} neighbors");
+        //board.PrintBoard();
+
+        //int neighbor = board.CountNeighbors(5, 5);
+
+        //Console.WriteLine($"The spot (5, 5) has {neighbor} neighbors");
     }
 }
